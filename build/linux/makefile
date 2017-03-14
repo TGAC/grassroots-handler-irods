@@ -1,21 +1,17 @@
 NAME 		= irods_handler
-DIR_SRC = $(DIR_HANDLER_ROOT_SRC)/irods/src
-DIR_INCLUDE = $(DIR_HANDLER_ROOT_SRC)/irods/include
-CC		= g++
-CXX		= g++
+DIR_BUILD :=  $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
+DIR_SRC := $(realpath $(DIR_BUILD)/../../src)
+DIR_INCLUDE := $(realpath $(DIR_BUILD)/../../include)
+COMP		= gcc
+LINK		= ld
 MAKEDEPEND 	= gcc -MM -MF
 
 
-BUILD		= debug
-
-
-ifeq ($(DIR_ROOT),)
-export DIR_ROOT = $(realpath $(../..))
+ifeq ($(DIR_BUILD_UTILS),)
+export DIR_BUILD_UTILS = $(realpath $(DIR_BUILD)/../../../../build_utils/linux)
 endif
+include $(DIR_BUILD_UTILS)/project.properties
 
-ifneq ($(PROPERTIES_SET),1)
-include $(DIR_BUILD_ROOT)/project.properties
-endif
 
 export DIR_INSTALL=$(DIR_GRASSROOTS_INSTALL)/handlers
 
@@ -49,6 +45,6 @@ LDFLAGS += \
 	-L$(DIR_GRASSROOTS_UTIL_LIB) -l$(GRASSROOTS_UTIL_LIB_NAME) 
 	
 	
-include $(DIR_BUILD_ROOT)/irods.mk
+-include $(DIR_BUILD_UTILS)/irods.mk
 	
-include $(DIR_BUILD_ROOT)/generic_makefiles/shared_library.makefile
+include $(DIR_BUILD_UTILS)/generic_makefiles/shared_library.makefile
