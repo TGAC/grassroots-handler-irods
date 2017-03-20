@@ -42,4 +42,4 @@ LDFLAGS += \
 	
 -include $(DIR_BUILD_UTILS)/irods.mk
 	
-include $(DIR_BUILD_UTILS)/generic_makefiles/shared_library.makefile
+include $(DIR_BUILD_CONFIG)/generic_makefiles/shared_library.makefile
