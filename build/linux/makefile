@@ -27,7 +27,7 @@ INCLUDES = \
 	-I$(DIR_GRASSROOTS_PARAMS_INC) \
 	-I$(DIR_JANSSON_INC) \
 	-I$(DIR_UUID_INC) \
-	-I$(DIR_SHARED_IRODS_INC)
+	-I$(DIR_IRODS_INC)	
 	
 SRCS 	= \
 	irods_handler.c 
@@ -40,6 +40,5 @@ LDFLAGS += \
 	-L$(DIR_GRASSROOTS_UTIL_LIB) -l$(GRASSROOTS_UTIL_LIB_NAME) 
 	
 	
--include $(DIR_BUILD_UTILS)/irods.mk
-	
 include $(DIR_BUILD_CONFIG)/generic_makefiles/shared_library.makefile
+
