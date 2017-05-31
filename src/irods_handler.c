@@ -93,43 +93,33 @@ Handler *GetHandler (const UserDetails *user_p)
 
 	if (handler_p)
 		{
-			const char *username_s = NULL;
-			const char *password_s = NULL; 
+			struct IRodsConnection *connection_p = CreateIRodsConnectionFromUserDetails (user_p);
 
-			#if IRODS_HANDLER_DEBUG >= STM_LEVEL_FINE
-			PrintJSONToLog (credentials_p, NULL, STM_LEVEL_FINE, __FILE__, __LINE__);
-			#endif
-			
-			if (GetUsernameAndPassword (user_p, PROTOCOL_IRODS_S, &username_s, &password_s))
+			if (connection_p)
 				{
-					struct IRodsConnection *connection_p = CreateIRodsConnection ((char *) username_s, (char *) password_s);
+					InitialiseHandler (& (handler_p -> irh_base_handler),
+						InitIRodsHandler,
+						IsResourceForIRodsHandler,
+						GetIRodsHandlerProtocol,
+						GetIRodsHandlerName,
+						GetIRodsHandlerDescription,
+						OpenIRodsHandler,
+						ReadFromIRodsHandler,
+						WriteToIRodsHandler,
+						SeekIRodsHandler,
+						CloseIRodsHandler,
+						GetIRodsHandlerStatus,
+						CalculateFileInformationFromIRodsHandler,
+						FreeIRodsHandler);
 
-					if (connection_p)
-						{
-							InitialiseHandler (& (handler_p -> irh_base_handler),
-								InitIRodsHandler,
-								IsResourceForIRodsHandler,
-								GetIRodsHandlerProtocol,
-								GetIRodsHandlerName,
-								GetIRodsHandlerDescription,
-								OpenIRodsHandler,
-								ReadFromIRodsHandler,
-								WriteToIRodsHandler,
-								SeekIRodsHandler,
-								CloseIRodsHandler,
-								GetIRodsHandlerStatus,
-								CalculateFileInformationFromIRodsHandler,
-								FreeIRodsHandler);
+						handler_p -> irh_connection_p = connection_p;
+						handler_p -> irh_obj_p = NULL;
+						handler_p -> irh_stat_p = NULL;
+						handler_p -> irh_status = HS_GOOD;
 
-								handler_p -> irh_connection_p = connection_p;
-								handler_p -> irh_obj_p = NULL;
-								handler_p -> irh_stat_p = NULL;
-								handler_p -> irh_status = HS_GOOD;
-								
-								return ((Handler *) handler_p);
-						}		/* if (connection_p) */
-													
-				}		/* if (GetUsernameAndPassword (credentials_p, &username_s, &password_s)) */
+						return ((Handler *) handler_p);
+				}		/* if (connection_p) */
+
 				
 			FreeMemory (handler_p);
 		}		/* if (handler_p) */
