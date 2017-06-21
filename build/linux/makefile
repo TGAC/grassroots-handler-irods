@@ -3,6 +3,8 @@ DIR_BUILD :=  $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 DIR_SRC := $(realpath $(DIR_BUILD)/../../src)
 DIR_INCLUDE := $(realpath $(DIR_BUILD)/../../include)
 
+ifeq ($(IRODS_ENABLED), 1)
+
 ifeq ($(DIR_BUILD_CONFIG),)
 export DIR_BUILD_CONFIG := $(realpath $(DIR_BUILD)/../../../../build-config/linux)
 endif
@@ -42,3 +44,4 @@ LDFLAGS += \
 	
 include $(DIR_BUILD_CONFIG)/generic_makefiles/shared_library.makefile
 
+endif
