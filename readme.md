@@ -14,15 +14,21 @@ The files to build the iRODS handler are in the ```build/<platform>``` directory
 
 If you enter this directory 
 
-```cd build/linux```
+```
+cd build/linux
+```
 
 you can then build the service by typing
 
-```make all```
+```
+make all
+```
 
 and then 
 
-```make install```
+```
+make install
+```
 
 to install the handler into the Grassroots system where it will be available for use immediately.
 
