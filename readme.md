@@ -1,4 +1,4 @@
-﻿# iRODS handler {#irods_handler}
+﻿# iRODS handler {#irods_handler_guide}
 
 The iRODS handler allows the Grassroots Server to access data objects and collections stored on an [iRODS](https://irods.org) system.
 
