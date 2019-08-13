@@ -92,8 +92,7 @@ extern "C"
  * @memberof IRodsHandler
  * @ingroup irods_handler_group
  */
-IRODS_HANDLER_API Handler *GetHandler (const UserDetails *user_p);
-
+IRODS_HANDLER_API Handler *GetHandler (const UserDetails *user_p, GrassrootsServer *grassroots_p);
 
 /**
  * Free an iRODS Handler.

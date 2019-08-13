@@ -87,7 +87,7 @@ Handler *GetIRodsHandler (const char * const username_s, const char * const pass
 }
 */
 
-Handler *GetHandler (const UserDetails *user_p)
+Handler *GetHandler (const UserDetails *user_p, GrassrootsServer *grassroots_p)
 {
 	IRodsHandler *handler_p = (IRodsHandler *) AllocMemory (sizeof (IRodsHandler));
 
